@@ -38,5 +38,7 @@ type CV {
       conditions: Boolean!
       description: String
     ): Intern
+
+     deleteIntern(id: ID!): Intern
   }
 `;

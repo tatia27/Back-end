@@ -51,6 +51,15 @@ export const internResolvers = {
 
       return await intern.save();
     },
+
+    deleteIntern: async (_, { id }) => {
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        throw new Error("Invalid company ID");
+      }
+      const deleted = await Intern.findByIdAndDelete(id);
+      if (!deleted) throw new Error("Company not found");
+      return deleted;
+    },
   },
   Intern: {
     id: (parent) => parent._id.toString(),
