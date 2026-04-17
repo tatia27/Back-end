@@ -16,7 +16,6 @@ type CV {
     middleName: String
     lastName: String!
     email: String!
-    conditions: Boolean!
     role: String!
     description: String
     favorites: [ID]
@@ -35,7 +34,6 @@ type CV {
       lastName: String!
       email: String!
       password: String!
-      conditions: Boolean!
       description: String
     ): Intern
 

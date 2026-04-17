@@ -36,10 +36,11 @@ export const companyResolvers = {
         passwordHash,
         photo,
         description,
-        role: "Company",
+        role: "company",
       });
       return company;
     },
+
     updateCompany: async (_, { id, name, description, photo }) => {
       if (!mongoose.Types.ObjectId.isValid(id)) {
         throw new Error("Invalid company ID");
@@ -58,6 +59,7 @@ export const companyResolvers = {
       }
       return updatedCompany;
     },
+
     deleteCompany: async (_, { id }) => {
       if (!mongoose.Types.ObjectId.isValid(id)) {
         throw new Error("Invalid company ID");
@@ -67,6 +69,7 @@ export const companyResolvers = {
       return deleted;
     },
   },
+
   Company: {
     id: (parent) => parent._id.toString(),
   },

@@ -21,12 +21,11 @@ export const internResolvers = {
   Mutation: {
     createIntern: async (_, args) => {
       const {
-        firstName,
-        secondName,
+        firstName, //
+        middledName,
         lastName,
         email,
         password,
-        conditions,
         description,
       } = args;
 
@@ -40,13 +39,12 @@ export const internResolvers = {
 
       const intern = new Intern({
         firstName,
-        secondName,
+        middledName,
         lastName,
         email,
         passwordHash,
-        conditions,
         description,
-        role: "Intern",
+        role: "intern",
       });
 
       return await intern.save();

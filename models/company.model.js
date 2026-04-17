@@ -18,7 +18,8 @@ export const companySchema = new mongoose.Schema({
   role: {
     type: String,
     required: true,
-    enum: ["Intern", "Company", "Admin"],
+    default: "company",
+    enum: ["intern", "company", "admin"],
   },
   photo: String,
   description: String,

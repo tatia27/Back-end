@@ -23,22 +23,17 @@ export const internSchema = new mongoose.Schema(
       required: true,
       minlength: 8,
     },
-    conditions: {
-      type: Boolean,
-      required: true,
-    },
     role: {
       type: String,
       required: true,
-      default: "Intern",
-      enum: ["Intern", "Company", "Admin"],
+      default: "intern",
+      enum: ["intern", "company", "admin"],
     },
     description: String,
     favorites: {
       type: [mongoose.Schema.Types.ObjectId],
       default: [],
     },
-
     cv: {
       age: {
         type: Number,
