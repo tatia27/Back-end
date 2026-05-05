@@ -8,6 +8,7 @@ export const internshipResolvers = {
     internships: async () => {
       return await Internship.find();
     },
+
     getInternship: async (_, { id }) => {
       if (!mongoose.Types.ObjectId.isValid(id)) {
         throw new Error("Invalid Internship ID");
@@ -24,6 +25,35 @@ export const internshipResolvers = {
           isActive: true,
         });
       } catch (err) {
+        throw new Error(err.message);
+      }
+    },
+
+    getRecommendedInternships: async (_, { internId, limit = 5 }) => {
+      try {
+        const response = await fetch(
+          `http://127.0.0.1:8001/recommendations/${internId}?limit=${limit}`,
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch recommendations from ML service");
+        }
+
+        const recommendedIds = await response.json();
+
+        const internships = await Internship.find({
+          _id: { $in: recommendedIds },
+        });
+
+        const recommendedList = recommendedIds
+          .map((id) =>
+            internships.find((internship) => internship._id.toString() === id),
+          )
+          .filter(Boolean);
+
+        return recommendedList;
+      } catch (err) {
+        console.error("Recommendation error:", err.message);
         throw new Error(err.message);
       }
     },

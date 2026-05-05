@@ -30,6 +30,7 @@ export const internshipType = `
     getFavoritesInternships(internId: ID!): [Internship]
     getInternshipsForCompany(id: ID!): [Internship]
     participantsOfInternship(id: ID!): [ID]
+    getRecommendedInternships(internId: ID!, limit: Int): [Internship!]!
     getFilteredInternships(
     page: Int
     limit: Int
@@ -56,8 +57,6 @@ export const internshipType = `
     
     applyForInternship(internshipId: ID!, userId: ID!): Internship
 
- 
-    
     updateInternship(
       id: ID!
       title: String
